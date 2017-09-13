@@ -10,13 +10,23 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 
+// Helper imports
+import { TableComponent } from './components/table/table.component';
+
+// Task imports
+import { TaskComponent } from './components/task/task.component';
+import { TaskService } from './components/task/task.service';
+
+
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        TableComponent,
+        TaskComponent
     ],
     imports: [
         CommonModule,
@@ -27,6 +37,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'task', component: TaskComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

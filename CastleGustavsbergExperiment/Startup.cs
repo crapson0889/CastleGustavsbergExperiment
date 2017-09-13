@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CastleGustavsbergExperiment.Helpers;
 
 namespace CastleGustavsbergExperiment
 {
@@ -52,6 +53,12 @@ namespace CastleGustavsbergExperiment
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
+            });
+
+            // Generate typescript objects on runtime
+            TypeScriptGenerator.Generate(new List<Type>
+            {
+                typeof(Models.Task)
             });
         }
     }

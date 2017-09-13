@@ -1,0 +1,18 @@
+<p *ngIf="!_data"><em>Loading...</em></p>
+
+<table class='table' *ngIf="_data">
+    <thead>
+        <tr>
+            <th *ngFor="let property of typeMetadata.properties">
+                {{property}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of _data">
+            <ng-container *ngFor="let property of typeMetadata.properties">
+                <td (click)="rowClicked(item)">{{ item[property] }}</td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>
