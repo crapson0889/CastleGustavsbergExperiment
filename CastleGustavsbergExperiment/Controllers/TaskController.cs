@@ -13,7 +13,7 @@ namespace CastleGustavsbergExperiment.Controllers
     {
         private static string[] Subjects = new[]
         {
-            "Complete Auth", "Call Member", "Complete Case", "Clinical Review", "MD Review", "Plan the Care", "Email Sarah Saylor", "Communication Record", "Create Task", "Send Letter"
+            "Complete Auth", "Call Member", "Complete Case", "Clinical Review", "MD Review", "Plan the Care", "Communication Record", "Create Task", "Send Letter"
         };
 
         [HttpGet("[action]")]
