@@ -10,6 +10,7 @@ export class ModelMetadata {
     }
 }
 
+// Need to look into how to I just return ModelTypeMetadata, without having to import ModelMetadata
 export class ModelTypeMetadata {
     public static properties: string[];
 }

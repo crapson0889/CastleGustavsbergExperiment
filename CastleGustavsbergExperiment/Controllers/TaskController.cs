@@ -1,53 +1,28 @@
-﻿using CastleGustavsbergExperiment.Models;
+﻿using CastleGustavsbergExperiment.Helpers;
+using CastleGustavsbergExperiment.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 
 namespace CastleGustavsbergExperiment.Controllers
 {
     [Route("api/[controller]")]
     public class TaskController : Controller
     {
-        private static string[] Subjects = new[]
-        {
-            "Complete Auth", "Call Member", "Complete Case", "Clinical Review", "MD Review", "Plan the Care", "Email Sarah Saylor", "Communication Record", "Create Task", "Send Letter"
-        };
-
         [HttpGet("[action]")]
         public IEnumerable<Task> Tasks()
         {
-            SqlConnection connection;
-            var connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=model;Integrated Security=SSPI;";
-            connection = new SqlConnection(connectionString);
-            var sql = "select * from Task";
-            var dataSet = new DataSet();
+            var dataSet = DatabaseAssistor.GetRequest("select * from Task");
 
             var tasks = new List<Task>();
 
-            try
+            for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
             {
-                connection.Open();
-
-                var command = new SqlCommand(sql, connection);
-                var adapter = new SqlDataAdapter(command);
-                adapter.Fill(dataSet);
-
-                for (var i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+                tasks.Add(new Task
                 {
-                    tasks.Add(new Task
-                    {
-                        Id = Convert.ToInt32(dataSet.Tables[0].Rows[i]["Id"]),
-                        Subject = Convert.ToString(dataSet.Tables[0].Rows[i]["Subject"]),
-                    });
-                }
-
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
+                    Id = Convert.ToInt32(dataSet.Tables[0].Rows[i]["Id"]),
+                    Subject = Convert.ToString(dataSet.Tables[0].Rows[i]["Subject"]),
+                });
             }
 
             return tasks;
@@ -56,13 +31,15 @@ namespace CastleGustavsbergExperiment.Controllers
         [HttpGet("[action]/{id}")]
         public Task Task(int id)
         {
-            var rng = new Random();
+            var dataSet = DatabaseAssistor.GetRequest($"select * from Task where id = {id}");
 
-            return new Task
+            var task = new Task
             {
-                Id = rng.Next(-20, 55),
-                Subject = Subjects[rng.Next(Subjects.Length)]
+                Id = Convert.ToInt32(dataSet.Tables[0].Rows[0]["Id"]),
+                Subject = Convert.ToString(dataSet.Tables[0].Rows[0]["Subject"])
             };
+
+            return task;
         }
     }
 }

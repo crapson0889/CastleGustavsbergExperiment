@@ -1,0 +1,12 @@
+<p *ngIf="!_data"><em>Loading...</em></p>
+
+<div class="container" *ngIf="_data">
+    <div class="row" *ngFor="let property of typeMetadata.properties">
+        <div class="col-3">
+            <label for="{{property}}">{{property}}</label>
+        </div>
+        <div class="col">
+            <span id="{{property}}">{{_data[property]}}</span>
+        </div>
+    </div>
+</div>

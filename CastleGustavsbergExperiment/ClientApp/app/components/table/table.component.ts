@@ -23,7 +23,6 @@ export class TableComponent {
             this._data = value;
 
             this.typeMetadata = ModelMetadata.getMetadataForType(this.type);
-            console.log(this.typeMetadata);
         }
     }
 
@@ -31,9 +30,6 @@ export class TableComponent {
     eventRowClick: EventEmitter<any> = new EventEmitter<any>();
 
     private rowClicked(item: any): void {
-        console.log("row clicked");
-        console.log(item);
-
         this.eventRowClick.emit(item);
     }
 }
