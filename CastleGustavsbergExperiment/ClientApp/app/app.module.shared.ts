@@ -20,6 +20,7 @@ import { ViewComponent } from './components/view/view.component';
 import { TaskComponent } from './components/task/task.component';
 import { TaskTableComponent } from './components/task/task-table.component';
 import { TaskViewComponent } from './components/task/task-view.component';
+import { TaskEditComponent } from './components/task/task-edit.component';
 import { TaskService } from './components/task/task.service';
 
 import { BackButtonDirective } from './directives/back-button.directive'
@@ -36,6 +37,7 @@ import { BackButtonDirective } from './directives/back-button.directive'
         TaskComponent,
         TaskTableComponent,
         TaskViewComponent,
+        TaskEditComponent,
         BackButtonDirective
     ],
     imports: [

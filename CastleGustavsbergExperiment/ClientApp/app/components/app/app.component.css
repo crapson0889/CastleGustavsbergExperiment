@@ -4,3 +4,11 @@
         padding-top: 50px;
     }
 }
+
+label:after {
+    content: ": ";
+}
+
+td:hover {
+    cursor: pointer;
+}

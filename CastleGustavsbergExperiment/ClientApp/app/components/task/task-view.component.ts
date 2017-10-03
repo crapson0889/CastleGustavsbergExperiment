@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ModelMetadata, ModelTypeMetadata } from '../../models/model-metadata';
 
@@ -17,7 +17,7 @@ export class TaskViewComponent {
     private sub: any;
     typeMetadata: ModelTypeMetadata;
 
-    constructor (private taskService: TaskService, private route: ActivatedRoute) { }
+    constructor (private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
 
     // Runs on initialization
     ngOnInit(): void {
@@ -25,8 +25,9 @@ export class TaskViewComponent {
 
         this.typeMetadata = ModelMetadata.getMetadataForType("Task");
 
+        // Is this the best way to get parameters from URL?
         this.sub = this.route.params.subscribe(params => {
-            this.id = +params['id'];
+            this.id = +params['id']; 
 
             this.taskService.getTask(this.id).then(task => this.task = task);
         })
@@ -34,5 +35,9 @@ export class TaskViewComponent {
 
     ngOnDestory(): void {
         this.sub.unsubscribe();
+    }
+
+    edit(): void {
+        this.router.navigateByUrl('task/' + this.id + '/edit')
     }
 }
